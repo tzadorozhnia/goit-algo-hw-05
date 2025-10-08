@@ -27,17 +27,15 @@ def add_contact(args, contacts: dict) -> str:
 def change_contact(args, contacts: dict) -> str:
     """Змінює телефон існуючого контакту."""
     name, phone = args
-    if name in contacts:
-        contacts[name] = phone
-        return "Contact updated."
-    return f"Contact '{name}' not found."
+    _ = contacts[name]
+    contacts[name] = phone
+    return "Contact updated."
+
 @input_error
 def show_phone(args, contacts: dict) -> str:
     """Показує телефон за ім’ям."""
     name = args[0]
-    if name in contacts:
-        return contacts[name]
-    return f"Contact '{name}' not found."
+    return contacts[name]
 
 def show_all(contacts: dict) -> str:
     """Виводить усі збережені контакти."""
