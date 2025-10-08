@@ -11,7 +11,7 @@ def generator_numbers(text: str) -> Generator[float, None, None]:
     """
     # регулярний вираз для чисел з обох боків від пробілів
     pattern = r'(?<= )\d+\.\d+(?= )'
-    for match in re.finditer(pattern, f' {text} '):  # додаємо пробіли на початок/кінець
+    for match in re.finditer(pattern, text):  # додаємо пробіли на початок/кінець
         yield float(match.group())
 
 
