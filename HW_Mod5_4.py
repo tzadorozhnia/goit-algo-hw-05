@@ -1,4 +1,4 @@
-def input_error(func):
+'''def input_error(func):
     def inner(*args, **kwargs):
         try:
             return func(*args, **kwargs)
@@ -8,8 +8,23 @@ def input_error(func):
             return "Enter correct user name."
         except IndexError:
             return "Enter user name."
+    return inner'''
+
+def input_error(func):
+    def inner(*args, **kwargs):
+        try:
+            return func(*args, **kwargs)
+        except ValueError:
+            if func.__name__ == "parse_input":
+                return "", []  # якщо split() дає [] cmd, *args = [] злове ValueError
+            return "Give me name and phone please."
+        except KeyError:
+            return "Enter correct user name."
+        except IndexError:
+            return "Enter user name."
     return inner
 
+@input_error
 def parse_input(user_input: str):
     """Парсить введений рядок у команду та аргументи."""
     cmd, *args = user_input.split()
